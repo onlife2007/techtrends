@@ -40,6 +40,6 @@ jobs:
         with:
           context: ./techtrends
           file: ./techtrends/Dockerfile
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: onlife2007/techtrends:latest
