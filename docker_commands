@@ -1,0 +1,47 @@
+## Docker commands used to build the application 
+# TODO: insert the docker build command
+docker build -t techtrends .
+
+## Docker commands used to run the application
+# TODO: insert the docker run command
+docker run -d -p 7111:3111 techtrends
+
+## Docker commands used to get the application logs
+# TODO: insert the docker logs command
+docker logs b2d7d677aebe
+
+## Logs from the container running the TechTrends application
+# TODO: paste logs from the Docker container 
+INFO:werkzeug:[2023-03-06 07:08:24,171],  * Running on http://172.17.0.2:3111/ (Press CTRL+C to quit)
+INFO:werkzeug:[2023-03-06 07:08:40,955], 172.17.0.1 - - [06/Mar/2023 07:08:40] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:08:41,015], 172.17.0.1 - - [06/Mar/2023 07:08:41] "GET /static/css/main.css HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:08:41,073], 172.17.0.1 - - [06/Mar/2023 07:08:41] "GET /favicon.ico HTTP/1.1" 404 -
+INFO:app:[2023-03-06 07:08:43,986], About page is retrieved
+INFO:werkzeug:[2023-03-06 07:08:43,987], 172.17.0.1 - - [06/Mar/2023 07:08:43] "GET /about HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:08:44,013], 172.17.0.1 - - [06/Mar/2023 07:08:44] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:[2023-03-06 07:08:44,852], 172.17.0.1 - - [06/Mar/2023 07:08:44] "GET /create HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:08:44,885], 172.17.0.1 - - [06/Mar/2023 07:08:44] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:[2023-03-06 07:08:46,052], 172.17.0.1 - - [06/Mar/2023 07:08:46] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:08:46,073], 172.17.0.1 - - [06/Mar/2023 07:08:46] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:[2023-03-06 07:08:59,816], 172.17.0.1 - - [06/Mar/2023 07:08:59] "GET /healthz HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:09:03,964], 172.17.0.1 - - [06/Mar/2023 07:09:03] "GET /metrics HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:10:21,312], 172.17.0.1 - - [06/Mar/2023 07:10:21] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:10:21,336], 172.17.0.1 - - [06/Mar/2023 07:10:21] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:[2023-03-06 07:10:22,816], 172.17.0.1 - - [06/Mar/2023 07:10:22] "GET /create HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:10:22,840], 172.17.0.1 - - [06/Mar/2023 07:10:22] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app:[2023-03-06 07:10:43,041], Article "New CNCF project" is created!
+INFO:werkzeug:[2023-03-06 07:10:43,042], 172.17.0.1 - - [06/Mar/2023 07:10:43] "POST /create HTTP/1.1" 302 -
+INFO:werkzeug:[2023-03-06 07:10:43,047], 172.17.0.1 - - [06/Mar/2023 07:10:43] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:10:43,072], 172.17.0.1 - - [06/Mar/2023 07:10:43] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app:[2023-03-06 07:10:46,284], Article "New CNCF project" retrieved!
+INFO:werkzeug:[2023-03-06 07:10:46,294], 172.17.0.1 - - [06/Mar/2023 07:10:46] "GET /7 HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:10:46,318], 172.17.0.1 - - [06/Mar/2023 07:10:46] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:[2023-03-06 07:12:12,298], 172.17.0.1 - - [06/Mar/2023 07:12:12] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:12:12,332], 172.17.0.1 - - [06/Mar/2023 07:12:12] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:werkzeug:[2023-03-06 07:12:30,076], 172.17.0.1 - - [06/Mar/2023 07:12:30] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app:[2023-03-06 07:19:16,936], Article "2020 CNCF Annual Report" retrieved!
+INFO:werkzeug:[2023-03-06 07:19:16,938], 172.17.0.1 - - [06/Mar/2023 07:19:16] "GET /1 HTTP/1.1" 200 -
+INFO:werkzeug:[2023-03-06 07:19:16,996], 172.17.0.1 - - [06/Mar/2023 07:19:16] "GET /static/css/main.css HTTP/1.1" 304 -
+INFO:app:[2023-03-06 07:19:20,123], Non-existed article is accessed
+INFO:werkzeug:[2023-03-06 07:19:20,126], 172.17.0.1 - - [06/Mar/2023 07:19:20] "GET /100 HTTP/1.1" 404 -
+INFO:werkzeug:[2023-03-06 07:19:20,152], 172.17.0.1 - - [06/Mar/2023 07:19:20] "GET /static/css/main.css HTTP/1.1" 304 -
