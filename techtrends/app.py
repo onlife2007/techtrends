@@ -1,11 +1,18 @@
 import sqlite3
 import logging
 import sys
+import os
 
 from flask import Flask, jsonify, json, render_template, request, url_for, redirect, flash
 from werkzeug.exceptions import abort
 
-# Set handlers for STDOUT and STDERR
+# Configure logging
+loglevel = os.getenv("LOGLEVEL", "DEBUG").upper()
+loglevel = (
+    getattr(logging, loglevel)
+    if loglevel in ["CRITICAL", "DEBUG", "ERROR", "INFO", "WARNING",]
+    else logging.DEBUG
+)
 stdout_handler = logging.StreamHandler(sys.stdout)
 stdout_handler.setLevel(logging.DEBUG)
 
@@ -14,10 +21,8 @@ stderr_handler.setLevel(logging.ERROR)
 
 handlers = [stderr_handler, stdout_handler]
 
-# Define the connection_count
-connection_count = 0
 # Config log at the DEBUG level and handlers
-logging.basicConfig(level=logging.DEBUG, 
+logging.basicConfig(level=loglevel, 
     format='%(levelname)s:%(name)s:[%(asctime)s], %(message)s', 
     handlers=handlers)
 
@@ -40,12 +45,13 @@ def get_post(post_id):
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your secret key'
 
+# Define the connection_count
+app.config['DB_CONN_COUNTER'] = 0
 
 # Define the main route of the web application 
 @app.route('/')
 def index():
-    global connection_count
-    connection_count = connection_count + 1
+    app.config['DB_CONN_COUNTER'] = app.config['DB_CONN_COUNTER'] + 1
     connection = get_db_connection()
     posts = connection.execute('SELECT * FROM posts').fetchall()
     connection.close()
@@ -55,14 +61,13 @@ def index():
 # If the post ID is not found a 404 page is shown
 @app.route('/<int:post_id>')
 def post(post_id):
-    global connection_count
-    connection_count = connection_count + 1
+    app.config['DB_CONN_COUNTER'] = app.config['DB_CONN_COUNTER'] + 1
     post = get_post(post_id)
     if post is None:
-      app.logger.info('Non-existed article is accessed')
+      app.logger.error('Non-existed article is accessed')
       return render_template('404.html'), 404
     else:
-      app.logger.info('Article "' + post['title'] + '" retrieved!')
+      app.logger.info('Article %r retrieved!', post['title'])
       return render_template('post.html', post=post)
 
 # Define the About Us page
@@ -74,8 +79,7 @@ def about():
 # Define the post creation functionality 
 @app.route('/create', methods=('GET', 'POST'))
 def create():
-    global connection_count
-    connection_count = connection_count + 1
+    app.config['DB_CONN_COUNTER'] = app.config['DB_CONN_COUNTER'] + 1
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
@@ -110,7 +114,7 @@ def metrics():
     connection.close()
 
     response = app.response_class(
-            response=json.dumps({"db_connection_count": connection_count, "post_count": post_count[0]}),
+            response=json.dumps({"db_connection_count": app.config['DB_CONN_COUNTER'], "post_count": post_count[0]}),
             status=200,
             mimetype='application/json'
     )
